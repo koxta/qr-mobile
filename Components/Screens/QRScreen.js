@@ -18,12 +18,18 @@ class ScanScreen extends Component {
     this.state = {
       deviceId: ""
     };
-    this.getdeviceId();
   }
   getdeviceId = () => {
     const id = DeviceInfo.getUniqueID();
     this.setState({ deviceId: id });
+
+    fetch("http://192.168.100.8:3000/user/" + id);
   };
+
+  componentDidMount()
+  {
+      this.getdeviceId();
+  }
 
   render() {
     let scanner;
@@ -39,6 +45,25 @@ class ScanScreen extends Component {
         ref={camera => (scanner = camera)}
         onRead={e => {
           console.log("detected");
+
+            let json = JSON.stringify({
+                productId: JSON.parse(e.data).productId,
+                userId: this.state.deviceId,
+              });
+              console.warn(json);
+
+          fetch('http://192.168.100.8:3000/cart/'+this.state.deviceId, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              productId: JSON.parse(e.data).productId,
+              userId: this.state.deviceId,
+            }),
+          });
+/*{"productId":7,"userId":123123123}*/
 
           console.warn(e.data);
           this.props.navigation.navigate("Cart");
