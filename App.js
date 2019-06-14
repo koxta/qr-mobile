@@ -2,15 +2,22 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-      </View>
-    );
-  }
-}
+import {createStackNavigator, createAppContainer} from 'react-navigation';
+
+import QRScreen from './Components/Screens/QRScreen';
+import CartScreen from './Components/Screens/CartScreen';
+
+const MainNavigator = createStackNavigator({
+  QR: {screen: QRScreen},
+  Cart: {screen: CartScreen},
+},
+{
+  initialRouteName: 'QR'
+});
+
+const App = createAppContainer(MainNavigator);
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
