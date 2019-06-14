@@ -22,7 +22,9 @@ class CartScreen extends Component {
   }
 
   componentDidMount() {
-    return fetch("http://192.168.100.8:3000/products")
+    const { navigation } = this.props;
+    const deviceId = navigation.getParam('deviceId', 'NO-ID');
+    return fetch("http://192.168.100.8:3000/cart/"+deviceId)
       .then(response => response.json())
       .then(responeJson => {
         this.setState({ products: responeJson, isLoading: false }, () => {});

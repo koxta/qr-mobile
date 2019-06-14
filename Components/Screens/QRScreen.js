@@ -63,10 +63,12 @@ class ScanScreen extends Component {
               userId: this.state.deviceId,
             }),
           });
-/*{"productId":7,"userId":123123123}*/
 
           console.warn(e.data);
-          this.props.navigation.navigate("Cart");
+          this.props.navigation.navigate("Cart",
+          {
+              deviceId:this.state.deviceId
+          });
         }}
         topContent={<Text style={styles.centerText}>Scan QR Code</Text>}
         bottomContent={
