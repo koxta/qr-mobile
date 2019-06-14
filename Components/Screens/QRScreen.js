@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import {
   StyleSheet,
@@ -6,28 +6,26 @@ import {
   TouchableOpacity,
   Linking,
   Button
-} from 'react-native';
+} from "react-native";
 
-import QRCodeScanner from 'react-native-qrcode-scanner';
+import QRCodeScanner from "react-native-qrcode-scanner";
 
-import DeviceInfo from 'react-native-device-info';
+import DeviceInfo from "react-native-device-info";
 
 class ScanScreen extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-          deviceId: '',
-        };
-        this.getdeviceId();
-      }
-      getdeviceId = () => {
-        const id = DeviceInfo.getUniqueID();
-        this.setState({ deviceId: id, });
-      };
+  constructor() {
+    super();
+    this.state = {
+      deviceId: ""
+    };
+    this.getdeviceId();
+  }
+  getdeviceId = () => {
+    const id = DeviceInfo.getUniqueID();
+    this.setState({ deviceId: id });
+  };
 
   render() {
-
     let scanner;
 
     const startScan = () => {
@@ -38,19 +36,16 @@ class ScanScreen extends Component {
 
     return (
       <QRCodeScanner
-        ref={(camera) => scanner = camera}
-        onRead={(e)=>{
-            console.log("detected");
+        ref={camera => (scanner = camera)}
+        onRead={e => {
+          console.log("detected");
 
-            console.warn(e.data);
-          this.props.navigation.navigate('Cart');
+          console.warn(e.data);
+          this.props.navigation.navigate("Cart");
         }}
-        topContent={
-          <Text style={styles.centerText}>
-              Scan QR Code
-          </Text>
-        }
-        bottomContent={(<Button title="Reactivate" onPress={() => startScan()} />)
+        topContent={<Text style={styles.centerText}>Scan QR Code</Text>}
+        bottomContent={
+          <Button title="Reactivate" onPress={() => startScan()} />
         }
       />
     );
@@ -59,25 +54,22 @@ class ScanScreen extends Component {
 
 export default ScanScreen;
 
-
 const styles = StyleSheet.create({
   centerText: {
     flex: 1,
     fontSize: 18,
     padding: 32,
-    color: '#777',
+    color: "#777"
   },
   textBold: {
-    fontWeight: '500',
-    color: '#000',
+    fontWeight: "500",
+    color: "#000"
   },
   buttonText: {
     fontSize: 21,
-    color: 'rgb(0,122,255)',
+    color: "rgb(0,122,255)"
   },
   buttonTouchable: {
-    padding: 16,
-  },
+    padding: 16
+  }
 });
-
-
