@@ -10,16 +10,21 @@ import {
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
-import {YellowBox} from 'react-native';
-
+import DeviceInfo from 'react-native-device-info';
 
 class ScanScreen extends Component {
 
-
-
-  onSuccess = (e) => {
-
-  }
+    constructor() {
+        super();
+        this.state = {
+          deviceId: '',
+        };
+        this.getdeviceId();
+      }
+      getdeviceId = () => {
+        const id = DeviceInfo.getUniqueID();
+        this.setState({ deviceId: id, });
+      };
 
   render() {
 
